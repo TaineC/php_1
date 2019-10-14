@@ -1,13 +1,35 @@
-<?php require_once('header.php'); ?>
+<?php 
+    //super global variable
+    echo '<pre>';
+    print_r($_POST);
+    echo '<pre>';
+
+    $title = '';
+    $description = '';
+    $link = '';
+    $photo = 'moon.jpg';
+
+    if(isset($_POST['submit'])){
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $link = $_POST['link'];
+        $photo = $_POST['photo'];
+    }
+    else{
+        //send them back to the form -- stops them accesing a page that they shouldn't
+        header('Location:form.php');
+        exit;
+    }
+
+    require_once('header.php'); 
+?>
 
         <div class="card" style="width: 18rem;">
-        <img src="astronaut.jpg" class="card-img-top">
+        <img src="<?php echo $photo ?>" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <h5 class="card-title"><?php echo $title ?></h5>
+                <p class="card-description"><?php echo $description ?></p>
+                <a href="<?php echo $link ?>" class="card-link">view more...</a>
             </div>
         </div>
 
